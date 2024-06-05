@@ -11,7 +11,7 @@ const [weatherData, setWeatherData] = useState({})
   function getWeather() {    
     if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-    let API_KEY = '39b4e394366eff781489b23df6d1bcdb';
+    let API_KEY = '';
 
      const response   
      = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_KEY}`).then(data => {
