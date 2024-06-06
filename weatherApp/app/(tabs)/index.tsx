@@ -1,4 +1,4 @@
-import CurrentWeather from '../../components/currentWeather';
+import CurrentWeather from '../../components/CurrentWeather';
 import {useState} from 'react';
 import {View, Image, StyleSheet, Platform, Dimensions, Text} from 'react-native';
 import {Button} from 'react-native'

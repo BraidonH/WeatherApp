@@ -2,37 +2,19 @@ import {useState, useEffect} from 'react';
 import { Image, StyleSheet, Platform, Button } from 'react-native';
 import { Dimensions } from 'react-native'
 import {View, Text, TextInput, SafeAreaView} from 'react-native';
-import { measure } from 'react-native-reanimated';
 import { Feather } from '@expo/vector-icons';
 
 export default function CurrentWeather({data, sectionSelect}) {
-const [weatherData, setWeatherData] = useState({})
+const [location, setLocation] = useState(null);
+const [weatherData, setWeatherData] = useState({});
+const [error, setError] = useState(null); 
 
-  function getWeather() {    
-    if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-    let API_KEY = '39b4e394366eff781489b23df6d1bcdb';
 
-     const response   
-     = fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_KEY}`).then(data => {
-            return data.json();
-        })
-
-    response.then(async data => {
-        setWeatherData(data);
-    })
-    }, function (e) {
-        throw Error(e)
-    }, {
-        enableHighAccuracy: true
-    });
-    }
-  }
-
-  useEffect(() => {
-  getWeather()
-    console.log(weatherData.main)
-  }, [weatherData.base])
+useEffect(() => {
+  (async() => {
+    let {} = await Location.requestForegroundPermissionsAsync
+  })
+}, [])
 
   return (
     <SafeAreaView style={{ flex: 1}}>
@@ -53,15 +35,13 @@ const [weatherData, setWeatherData] = useState({})
           </Text>
         </View>
         <View style={{
-          paddingTop: 30
+          paddingTop: 30,
+          paddingBottom: 30
         }}>
           <Text style={styles.fontHeaders}>It's Sunny <Feather name="sun" size={24} color="black" /></Text>
           <Text style={styles.fontData}>It's perfect t-shirt weather</Text>
         </View>
         <Button
-        style={{
-            marginTop: 30
-        }}
         onPress={() => sectionSelect("")}
         title="return"
         color="#841584"
